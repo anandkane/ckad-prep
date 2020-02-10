@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: automount-disabled-po
+  name: automount-disabled-po
+spec:
+  containers:
+  - args:
+    - "100"
+    image: indysreeram/ubuntu-sleeper
+    name: automount-disabled-po
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+  automountServiceAccountToken: false
+status: {}
