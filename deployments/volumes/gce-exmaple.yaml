@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: dply-gce-vol-test
+  name: dply-gce-vol-test
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: dply-gce-vol-test
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: dply-gce-vol-test
+    spec:
+      volumes:
+      - name: gce-disk-vol
+        gcePersistentDisk:
+          pdName: sample-disk
+          readOnly: true
+      containers:
+      - image: busybox
+        name: busybox
+        command: ["sleep", "300"]
+        volumeMounts:
+        - name: gce-disk-vol
+          mountPath: /data/gce/disk
+        resources: {}
+status: {}

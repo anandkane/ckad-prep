@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: dply-pvc-example
+  name: dply-pvc-example
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: dply-pvc-example
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: dply-pvc-example
+    spec:
+      containers:
+      - image: busybox
+        name: busybox
+        resources: {}
+        command: ["sleep", "300"]
+        volumeMounts:
+        - name: pvc-vol
+          mountPath: /data/some/dir
+      volumes:
+      - name: pvc-vol
+        persistentVolumeClaim:
+          claimName: pvc-basic-claim
+status: {}

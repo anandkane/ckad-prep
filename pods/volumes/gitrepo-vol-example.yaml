@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: po-gitrepo-vol-example
+  name: po-gitrepo-vol-example
+spec:
+  volumes:
+  - name: git-repo-test
+    gitRepo:
+      repository: https://github.com/anandkane/ckad-prep.git
+      revision: master
+      directory: .
+  containers:
+  - command:
+    - sleep
+    - "300"
+    image: busybox
+    name: po-gitrepo-vol-example
+    volumeMounts:
+    - name: git-repo-test
+      mountPath: /data/gitrepo
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+status: {}
